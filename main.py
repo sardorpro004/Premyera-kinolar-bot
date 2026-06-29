@@ -4,14 +4,14 @@ from aiogram.enums import ParseMode
 import asyncio
 
 from config import BOT_TOKEN
-
+from handlers.start import router as start_router
 bot = Bot(
     token=BOT_TOKEN,
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
 )
 
 dp = Dispatcher()
-
+dp.include_router(start_router)
 async def main():
     print("Bot ishga tushdi...")
 
