@@ -28,3 +28,26 @@ subscribe_keyboard = InlineKeyboardMarkup(
         ]
     ]
 )
+
+admin_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="➕ Kino qo'shish",
+                callback_data="add_movie"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="📊 Statistika",
+                callback_data="statistics"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="📢 Reklama yuborish",
+                callback_data="broadcast"
+            )
+        ]
+    ]
+)
