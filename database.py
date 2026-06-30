@@ -1,20 +1,27 @@
-import aiosqlite
+import sqlite3
 
-DB_NAME = "movies.db"
+db = sqlite3.connect("movies.db")
+sql = db.cursor()
 
-async def create_db():
-    async with aiosqlite.connect(DB_NAME) as db:
-        await db.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            user_id INTEGER PRIMARY KEY
-        )
-        """)
+def create_db():
+    sql.execute("""
+    CREATE TABLE IF NOT EXISTS movies(
+        code TEXT PRIMARY KEY,
+        file_id TEXT
+    )
+    """)
+    db.commit()
 
-        await db.execute("""
-        CREATE TABLE IF NOT EXISTS movies (
-            code TEXT PRIMARY KEY,
-            file_id TEXT
-        )
-        """)
+def add_movie(code, file_id):
+    sql.execute(
+        "INSERT OR REPLACE INTO movies(code, file_id) VALUES(?, ?)",
+        (code, file_id)
+    )
+    db.commit()
 
-        await db.commit()
+def get_movie(code):
+    sql.execute(
+        "SELECT file_id FROM movies WHERE code=?",
+        (code,)
+    )
+    return sql.fetchone()
