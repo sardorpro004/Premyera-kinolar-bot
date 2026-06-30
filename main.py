@@ -7,6 +7,7 @@ from config import BOT_TOKEN
 from handlers.start import router as start_router
 bot = Bot(
     token=BOT_TOKEN,
+   from handlers.admin import router as admin_router
     from handlers.movie import router as movie_router
 from handlers.movie import router as movie_router
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
